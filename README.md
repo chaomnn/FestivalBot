@@ -1,1 +1,1 @@
-// todo
+A helper bot made for a local art festival.

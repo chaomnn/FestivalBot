@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "1.9.22"
+    application
 }
 
 group = "chaomian.baka"
@@ -20,9 +21,20 @@ dependencies {
     implementation("org.slf4j:slf4j-log4j12:2.0.9")
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
 kotlin {
     jvmToolchain(17)
+}
+
+application {
+    mainClass.set("MainKt")
+}
+
+tasks.withType<Jar> {
+    manifest.attributes["Main-Class"] = application.mainClass.get()
+    from(configurations.runtimeClasspath.get().map { file -> file.takeIf { it.isDirectory } ?: zipTree(file) })
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+tasks.test {
+    useJUnitPlatform()
 }

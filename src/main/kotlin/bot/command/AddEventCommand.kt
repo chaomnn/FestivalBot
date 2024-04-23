@@ -3,6 +3,8 @@ package bot.command
 import bot.BotHelper
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
+import org.apache.log4j.Level
+import org.apache.log4j.Logger
 import org.telegram.telegrambots.extensions.bots.commandbot.commands.BotCommand
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage
 import org.telegram.telegrambots.meta.api.objects.Chat
@@ -68,6 +70,7 @@ class AddEventCommand : BotCommand(COMMAND_NAME, DESCRIPTION) {
                 it.toInt()
             }
             val localTime = LocalTime(time[0], time[1])
+            Logger.getRootLogger().log(Level.INFO, "Adding new event")
             return DatabaseManager.addEvent(localDate, localTime, this.last())
         }
     }
