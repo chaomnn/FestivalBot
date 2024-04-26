@@ -6,6 +6,7 @@ enum class Buttons(val text: String) {
     MAIN_GUIDE("ГАЙД"),
     MAIN_CONTACT("Контакты \"Сказа\""),
     MAIN_DONATE("Поддержать проект"),
+    MAIN_ALTAI("Лики Алтая"),
 
     MEMBER_CRAFTSMAN("Художники"),
     MEMBER_ARTISTS("Артисты"),
