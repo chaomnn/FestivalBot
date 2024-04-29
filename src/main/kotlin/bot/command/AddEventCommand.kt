@@ -1,6 +1,7 @@
 package bot.command
 
 import bot.BotHelper
+import bot.MarkupHelper
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
 import org.apache.log4j.Level
@@ -34,7 +35,8 @@ class AddEventCommand : BotCommand(COMMAND_NAME, DESCRIPTION) {
         if (!BotHelper.isAdmin(message.chatId)) {
             return
         }
-        if (addEvent(message.text.removePrefix("/$COMMAND_NAME\n"), bot, message.chatId)) {
+        val textWithMarkup = MarkupHelper.getMessageTextWithMarkup(message)
+        if (addEvent(textWithMarkup.removePrefix("/$COMMAND_NAME\n"), bot, message.chatId)) {
             try {
                 bot.execute(
                     SendMessage.builder()
